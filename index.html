@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <title>FrootLoopsGame</title>
+        <style>
+            /* Reset CSS: Please avoid making changes here unless you know what you're doing :) */
+            *,
+            *::before,
+            *::after {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                font-family: 'Arial', sans-serif;
+                background-color: #111111;
+            }
+
+            @font-face {
+                font-family: 'FrootLoops';
+                src: url('assets/fonts/FrootLoops-Regular.ttf') format('truetype');
+                }
+        </style>
+        <style>
+            #rotate-warning {
+    display: none;
+    position: absolute;
+    color: white;
+    background: rgba(0,0,0,0.8);
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    
+    pointer-events: none; /* no bloquear clicks cuando invisible */
+}
+
+#rotate-warning.active {
+    display: flex;
+    pointer-events: auto; /* bloquea clicks hacia abajo */
+}
+            </style>
+    </head>
+    <body>
+        <div id="game-container"><div id="rotate-warning">Por favor, gira tu dispositivo</div></div>
+        <script src="./phaser.js"></script>
+        <script type="module" src="./src/main.js"></script>
+        <script src="./js/rotate.js"></script>
+    </body>
+    </html>
