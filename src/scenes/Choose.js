@@ -1,7 +1,7 @@
-import { YoichiSprite } from '../characters/Yoichi.js';
 import { TanjiroSprite } from '../characters/Tanjiro.js';
 import { PlayerSprite } from '../characters/Player.js';  // Clase genérica para player1, player2, player3
-import { LoaderGame } from './LoaderGame.js';
+import { KuromiSprite } from '../characters/Kuromi.js';
+import { MyMelodySprite } from '../characters/Melody.js';
 
 export class Choose extends Phaser.Scene {
     constructor() {
@@ -14,6 +14,17 @@ export class Choose extends Phaser.Scene {
             frameWidth: 32,
             frameHeight: 48
         });
+
+        this.load.spritesheet('kuromi-idle', 'assets/characters/kuromi/idle-kuromi.png', {
+            frameWidth: 36,
+            frameHeight: 46
+        });
+
+        this.load.spritesheet('melody-idle', 'assets/characters/myMelody/idle-melody.png', {
+            frameWidth: 268 / 8, // Asumiendo 8 frames horizontales
+            frameHeight: 52
+        });
+
 
         ['player1', 'player2', 'player3'].forEach(name => {
             this.load.spritesheet(`${name}-idle`, `assets/characters/${name}/idle-${name}.png`, {
@@ -108,6 +119,14 @@ export class Choose extends Phaser.Scene {
         const tanjiro = new TanjiroSprite(this, offset + 20, 0).setScale(4);
         characters.push(tanjiro);
         offset += spacing;
+
+        const kuromi = new KuromiSprite(this, offset, 0).setScale(4);
+        characters.push(kuromi);
+        offset += spacing;
+
+        const melody = new MyMelodySprite(this, offset + 10, 0).setScale(4);
+        characters.push(melody);
+        offset += spacing;
     
         const player1 = new PlayerSprite(this, offset + 10, 0, 'player1').setScale(6);
         characters.push(player1);
@@ -180,6 +199,9 @@ export class Choose extends Phaser.Scene {
             }
             if (selectedCharacter === tanjiro) {
                 arrowX -= 20;
+            }
+            if (selectedCharacter === kuromi) {
+                arrowX -= 10;
             }
     
             this.selectorArrow.x = arrowX;
