@@ -5,7 +5,7 @@ export class Tanjiro extends Phaser.Scene {
 
     preload() {
         this.load.spritesheet('tanjiro-idle', 'assets/characters/tanjiro/idle-tanjiro.png', {
-            frameWidth: 100,
+            frameWidth: 32,
             frameHeight: 48
         });
     }
