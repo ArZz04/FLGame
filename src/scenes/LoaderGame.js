@@ -32,28 +32,36 @@ export class LoaderGame extends Phaser.Scene {
                     fontFamily: 'FrootLoops',
                 }).setOrigin(0.5);
     
-                // Iniciar la siguiente escena inmediatamente cuando aparezca el texto
-                
-    
                 // Esperar un rato y hacer fade out del loader
                 this.time.delayedCall(1500, () => {
+                    this.scene.bringToTop('LoaderGame'); 
+                    // Lanzar la siguiente escena pero mantener LoaderGame encima
                     this.scene.launch(this.nextScene, {
                         lives: this.lives,
                         hasPet: this.hasPet,
                         playerSelected: this.playerSelected
                     });
-
+                    // Asegurar que LoaderGame esté encima
+                    
+                    // Fade out del texto y overlay
+                    this.tweens.add({
+                        targets: text,
+                        alpha: 0,
+                        duration: 3000
+                    });
+                    
                     this.tweens.add({
                         targets: [blackOverlay, text],
                         alpha: 0,
                         duration: 3000,
                         onComplete: () => {
-                            this.scene.stop('LoaderGame'); // quita la escena loader para mostrar la que ya está lanzada
+                            this.scene.stop('LoaderGame'); // Detener LoaderGame después del fade
                         }
                     });
                 });
             }
         });
     }
+
     
 }
