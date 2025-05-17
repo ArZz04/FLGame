@@ -1,23 +1,35 @@
-import { YoichiSprite } from '../characters/Yoichi.js';  // ruta relativa a donde guardes Yoichi.js
-import { TanjiroSprite } from '../characters/Tanjiro.js';  // ruta relativa a donde guardes Tanjiro.js
+import { YoichiSprite } from '../characters/Yoichi.js';
+import { TanjiroSprite } from '../characters/Tanjiro.js';
+import { PlayerSprite } from '../characters/Player.js';  // genérica para players 1,2,3
 
 export class Choose extends Phaser.Scene {
-
     constructor() {
         super('Choose');
     }
 
     preload() {
-        this.load.spritesheet('yoichi', 'assets/characters/yoichi.png', {
-            frameWidth: 540 / 6,   // ancho de cada frame (6 columnas máximo)
-            frameHeight: 348 / 6   // altura de cada frame (6 filas)
-          });
+        this.load.spritesheet('yoichi', 'assets/characters/yoichi/yoichi.png', {
+            frameWidth: 90,
+            frameHeight: 58
+        });
 
         this.load.spritesheet('tanjiro-idle', 'assets/characters/tanjiro/idle-tanjiro.png', {
-            frameWidth: 100,
+            frameWidth: 50,
             frameHeight: 48
         });
 
+        this.load.spritesheet('player1-idle', 'assets/characters/player1/idle-player1.png', {
+            frameWidth: 32,
+            frameHeight: 32
+        });
+        this.load.spritesheet('player2-idle', 'assets/characters/player2/idle-player2.png', {
+            frameWidth: 32,
+            frameHeight: 32
+        });
+        this.load.spritesheet('player3-idle', 'assets/characters/player3/idle-player3.png', {
+            frameWidth: 32,
+            frameHeight: 32
+        });
     }
 
     create() {
@@ -26,9 +38,12 @@ export class Choose extends Phaser.Scene {
             fontSize: '64px',
             color: '#ffffff'
         });
-      
-        const yoichi = new YoichiSprite(this, this.scale.width / 2, this.scale.height / 2).setScale(3);
-        const tanjiro = new TanjiroSprite(this, this.scale.width / 2, this.scale.height / 2).setScale(7);
-      
+
+        const yoichi = new YoichiSprite(this, this.scale.width / 2 - 200, this.scale.height / 2+40).setScale(2);
+        const tanjiro = new TanjiroSprite(this, this.scale.width / 2 + 10, this.scale.height / 2-25).setScale(5);
+
+        const player1 = new PlayerSprite(this, this.scale.width / 2 + 100, this.scale.height / 2, 'player1');
+        const player2 = new PlayerSprite(this, this.scale.width / 2 + 220, this.scale.height / 2, 'player2');
+        const player3 = new PlayerSprite(this, this.scale.width / 2 + 360, this.scale.height / 2, 'player3');
     }
 }
