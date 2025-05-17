@@ -26,9 +26,9 @@ export class LoaderGame extends Phaser.Scene {
             onComplete: () => {
                 // Mostrar texto de nivel y vidas
                 const text = this.add.text(centerX, centerY, `Nivel ${this.level} - Vidas ${this.lives}`, {
-                    fontSize: '48px',
+                    fontSize: '64px',
                     color: '#ffffff',
-                    fontFamily: 'Arial',
+                    fontFamily: 'FrootLoops',
                 }).setOrigin(0.5);
 
                 // Esperar un rato y bajar opacidad para revelar siguiente escena
