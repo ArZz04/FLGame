@@ -77,7 +77,14 @@ export class Choose extends Phaser.Scene {
                 if (isPointerDownPlay) {
                     PlayBtn.setTexture('play-button');
                     PlayBtn.setScale(1);
-                    this.scene.launch('LoaderGame', { level: 1, lives: 3, nextScene: 'Start' });
+            
+                    const gameManager = this.scene.get('GameManager');
+            
+                    // PASAR personaje seleccionado y si tiene mascota
+                    gameManager.setPlayerSelected(this.currentIndex); // índice del personaje seleccionado
+                    gameManager.setPet(pressed);
+            
+                    gameManager.startGame();
                 }
                 isPointerDownPlay = false;
             });
