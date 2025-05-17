@@ -2,6 +2,7 @@ import { Choose } from './scenes/Choose.js';
 import { Menu } from './scenes/Menu.js';
 import { Background } from './scenes/Background-Global.js';
 import { Preload } from './scenes/Preload.js';
+import { LoaderGame } from './scenes/LoaderGame.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -16,7 +17,8 @@ const config = {
         Preload,
         Background,
         Menu,
-        Choose
+        Choose,
+        LoaderGame
     ],
     scale: {
         mode: Phaser.Scale.FIT,

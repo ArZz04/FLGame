@@ -22,7 +22,7 @@ export class Preload extends Phaser.Scene {
             fill: '#ffffff'
         }).setOrigin(0.5);
 
-        const totalTime = 1000; // 3 segundos en ms
+        const totalTime = 500; // 3 segundos en ms
         let elapsedTime = 0;
 
         let assetsLoaded = false;
