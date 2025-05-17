@@ -30,20 +30,76 @@ export class Choose extends Phaser.Scene {
             frameWidth: 32,
             frameHeight: 32
         });
+
+        this.load.image('left-button', 'assets/UI/buttons/ArrowLeft-Bold/left-button.png');
+        this.load.image('left-button-pressed', 'assets/UI/buttons/ArrowLeft-Bold/left-button-pressed.png');
+
+        this.load.image('right-button', 'assets/UI/buttons/ArrowLeft-Bold/left-button.png'); // Puedes invertirla visualmente
+        this.load.image('right-button-pressed', 'assets/UI/buttons/ArrowLeft-Bold/left-button-pressed.png');
     }
 
     create() {
-        this.add.text(this.scale.width / 2.7, this.scale.height / 5, 'Seleccionar un personaje:', {
+        this.add.text(this.scale.width / 2.7, this.scale.height / 6, 'Seleccionar un personaje:', {
             fontFamily: 'FrootLoops',
-            fontSize: '64px',
+            fontSize: '48px',
             color: '#ffffff'
         });
 
-        const yoichi = new YoichiSprite(this, this.scale.width / 2 - 200, this.scale.height / 2+40).setScale(2);
-        const tanjiro = new TanjiroSprite(this, this.scale.width / 2 + 10, this.scale.height / 2-25).setScale(5);
+        // === CONTENEDOR CON TODOS LOS SPRITES ===
+        this.characterContainer = this.add.container(this.scale.width / 2, this.scale.height / 2);
 
-        const player1 = new PlayerSprite(this, this.scale.width / 2 + 100, this.scale.height / 2, 'player1');
-        const player2 = new PlayerSprite(this, this.scale.width / 2 + 220, this.scale.height / 2, 'player2');
-        const player3 = new PlayerSprite(this, this.scale.width / 2 + 360, this.scale.height / 2, 'player3');
+        const spacing = 150; // espacio horizontal entre personajes
+        let offset = -spacing * 2;
+
+        const yoichi = new YoichiSprite(this, offset, 0).setScale(2);
+        offset += spacing;
+
+        const tanjiro = new TanjiroSprite(this, offset, 0).setScale(4);
+        offset += spacing;
+
+        const player1 = new PlayerSprite(this, offset, 0, 'player1').setScale(3);
+        offset += spacing;
+
+        const player2 = new PlayerSprite(this, offset, 0, 'player2').setScale(3);
+        offset += spacing;
+
+        const player3 = new PlayerSprite(this, offset, 0, 'player3').setScale(3);
+
+        this.characterContainer.add([yoichi, tanjiro, player1, player2, player3]);
+
+        // === BOTONES VISUALES ===
+        const leftBtn = this.add.image(300, this.scale.height / 2, 'left-button').setInteractive();
+        leftBtn.setScale(0.5); // Escala el botón izquierdo
+        const rightBtn = this.add.image(this.scale.width - 300, this.scale.height / 2, 'right-button').setInteractive().setFlipX(true);
+        rightBtn.setScale(0.5); // Escala el botón derecho
+
+        const moveCharacters = (direction) => {
+            this.tweens.add({
+                targets: this.characterContainer,
+                x: this.characterContainer.x + (direction * spacing),
+                duration: 300,
+                ease: 'Power2'
+            });
+        };
+
+        // Botón izquierdo
+        leftBtn.on('pointerdown', () => {
+            leftBtn.setTexture('left-button-pressed');
+            moveCharacters(1);
+        });
+
+        leftBtn.on('pointerup', () => {
+            leftBtn.setTexture('left-button');
+        });
+
+        // Botón derecho
+        rightBtn.on('pointerdown', () => {
+            rightBtn.setTexture('right-button-pressed');
+            moveCharacters(-1);
+        });
+
+        rightBtn.on('pointerup', () => {
+            rightBtn.setTexture('right-button');
+        });
     }
 }
